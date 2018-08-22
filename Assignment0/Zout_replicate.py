@@ -3,7 +3,7 @@ import cv2 as cv
 import sys
 
 if(len(sys.argv)!=4):
-	print("Required -> python Zin_replicate.py <input_image> <zoom> <output_image>")
+	print("Required -> python Zout_replicate.py <input_image> <zoom> <output_image>")
 	exit()
 
 img = cv.imread(sys.argv[1])
