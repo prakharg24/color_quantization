@@ -124,7 +124,15 @@ def normalize(x):
 	return x/255.0
 
 def add_error(x,y,z):
-	return tuple(map(lambda x : x[0]+z*x[1], zip(x,y)))
+		ans = [0, 0, 0]
+	for i in range(0, 3):
+		ans[i] = x[i] + z*y[i]
+		if(ans[i]<0):
+			ans[i] = 0
+		elif(ans[i]>255):
+			ans[i] = 255
+
+	return ans
 
 if(len(sys.argv)!=6):
 	print("Required -> python quantization.py <input_image> <algo_code> <algo_parameter> <include_dithering> <output_image>")
