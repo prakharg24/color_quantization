@@ -127,7 +127,7 @@ def add_error(x,y,z):
 	return tuple(map(lambda x : x[0]+z*x[1], zip(x,y)))
 
 if(len(sys.argv)!=6):
-	print("Required -> python Zin_replicate.py <input_image> <algo_code> <algo_parameter> <include_dithering> <output_image>")
+	print("Required -> python quantization.py <input_image> <algo_code> <algo_parameter> <include_dithering> <output_image>")
 	print("Popularity Algorithm -> 1")
 	print("Median Cut Algorithm -> 2")
 	exit()
@@ -151,10 +151,13 @@ for i in range(len(img)):
 	print("Conversion :", i, "out of", len(img))
 	for j in range(len(img[0])):
 		point = (img[i][j][0],img[i][j][1],img[i][j][2])
+		#print(point)
 		cl_pt = find_close(point,lis)
+		#print(cl_pt)
 		new_img[i][j] = tuple(cl_pt)
 		if(bool_dither!=0):
 			err = tuple(map(lambda x : int(x[0])-int(x[1]), zip(point,cl_pt)))
+			#print(err)
 			if (j+1)<len(img[0]):
 				img[i][j+1] = add_error(img[i][j+1],err,3/8)
 			if (i+1)<len(img):
