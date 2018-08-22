@@ -3,14 +3,26 @@ import cv2 as cv
 from scipy.ndimage.filters import gaussian_filter
 
 
-def x_dog(image,ep,k,gamma):
-	p = 20
+def x_dog(image,ep,k,gamma,p):
 
 	dif_fil = dog(image, k, gamma)/255
-	#diff = dif_fil*image
+
+	# edge_fil = np.zeros((len(dif_fil), len(dif_fil[0])))
+	# for i in range(0, len(dif_fil)):
+	# 	for j in range(0, len(dif_fil[0])):
+	# 		if dif_fil[i][j].all() > 0:
+	# 			edge_fil[i][j] = 1
+	# 		else:
+	# 			edge_fil[i][j] = 0
+	# 		for k in range(0, 3):
+	# 			dif_fil[i][j][k] = int(edge_fil[i][j]*255)
+
+	# return dif_fil*255
+	# #diff = dif_fil*image
 	edge_fil = np.zeros((len(dif_fil), len(dif_fil[0])))
 
 	for i in range(0, len(dif_fil)):
+		print(i, "out of", len(dif_fil))
 		for j in range(0, len(dif_fil[0])):
 			if dif_fil[i][j].all() < ep:
 				edge_fil[i][j] = 1
@@ -30,8 +42,10 @@ def dog(image,k,gamma):
 	diff_filter = filter2 - filter1
 	return diff_filter
 
-img = cv.imread('gary.jpg')
-result = x_dog(img, 0.05, 10, 0.98)
+img = cv.imread('girl.jpg')
+result = x_dog(img, 0.05, 10, 0.98, 20)
+
+# cv.imwrite("new_grl.jpg", result)
 
 cv.imshow('det',result)
 cv.waitKey(0)
