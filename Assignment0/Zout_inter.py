@@ -6,8 +6,8 @@ def get_avg(img, i, j, zoom, k):
 	istart = max(0, i-int((zoom-1)/2))
 	jstart = max(0, j-int((zoom-1)/2))
 
-	iend = min(0, i+int(zoom/2))
-	jend = min(0, j+int(zoom/2))
+	iend = min(len(img), i+int(zoom/2))
+	jend = min(len(img[0]), j+int(zoom/2))
 
 	sum_img = 0
 	num_img = 0
